@@ -1,0 +1,16 @@
+chardet==3.0.4
+DateTime==4.3
+idna==2.5
+oauthlib==3.1.0
+PySocks==1.7.0
+python-musixmatch==1.0.0
+pytz==2019.2
+requests==2.18.4
+requests-oauthlib==1.2.0
+tweepy==3.8.0
+zope.interface==4.6.0
+certifi >= 14.05.14
+six == 1.11.0
+python_dateutil >= 2.5.3
+setuptools >= 21.0.0
+urllib3 == 1.22.0

@@ -1,0 +1,7 @@
+S/O to Cameron Ezell for his guide (creator of @KothScreens)
+
+ffmpeg command used to generate screencaps every 2 mins per episode
+ffmpeg -i "BroadCityS01E01.mp4" -ss 300 -qscale:v 10 -vf fps=1/120 ./ep1/frame%03d.png
+
+take_screencaps.sh is a bash script used to create the folders and naming the screenshots and storing them in the repo accordingly
+Honestly I don't remember shit since I'm uploading this 2 months after I made it
