@@ -4,8 +4,12 @@ from musixmatch_script import generate_fortune
 from config_script import create_twitter_api
 import time
 
-# designated since_id to start off script
-since_id = 1164382085114732545
+
+#retrieve most recent tweet in case bot has to restart
+def get_starting_fortune():
+    recent_tweets = api.mentions_timeline(count=1)
+    since_id = recent_tweets[0].id_str
+    return since_id
 
 #function to generate and tweet fortune
 def post_fortune(tweetid, handle):
@@ -16,8 +20,7 @@ def post_fortune(tweetid, handle):
     print('posted fortune: success')
 
 #scan for new mentions with keyword 'fortune'
-def scan_mentions():
-    global since_id
+def scan_mentions(since_id):
     while True:
         print('in while loop')
         print('since_id')
@@ -29,10 +32,13 @@ def scan_mentions():
             print(mention.user.screen_name)
             print(mention.id)
             print(mention.text)
-            print(now)
-            print(mention.created_at)
+            print('since_id')
+            print(since_id)
+            print('mention_id')
+            print(mention.id)
             # set cursor to latest tweet
-            since_id = max(mention.id, since_id)
+            since_id = max(int(mention.id), int(since_id))
+            print('max')
             print(since_id)
             #searching for keyword fortune
             if "fortune" in mention.text.lower():
@@ -50,11 +56,13 @@ def print_mentions():
         print(mention.id, mention.author.screen_name, mention.text)
 
 api = create_twitter_api()
+# getting most recent tweet in case bot resets
+since_id = get_starting_fortune()
 # infinite loop to keep scanning mentions
 while True:
     try:
         print('scan mentions()')
-        scan_mentions()
+        scan_mentions(since_id)
     except:
         print('exception thrown')
         time.sleep(2)
